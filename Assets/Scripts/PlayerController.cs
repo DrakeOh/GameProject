@@ -14,26 +14,28 @@ public class PlayerController : MonoBehaviour
 
     Vector2 movementInput;
 
-
+    public bool sucsess;
     Rigidbody2D rb;
-
-
+    private Animator animator;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
-
+    public float direction;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        if (movementInput != Vector2.zero) {
+        if (movementInput != Vector2.zero)
+        {
 
-            bool sucsess = TryMove(movementInput);
+             sucsess = TryMove(movementInput);
 
-            if (!sucsess ) {
+            if (!sucsess)
+            {
                 sucsess = TryMove(new Vector2(movementInput.x, 0));
 
                 if (!sucsess)
@@ -43,7 +45,25 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
+        HandleAnimation();
+
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+
+        //    animator.SetBool("IsMoving", true);
+        //    animator.SetTrigger("WalkRight");
+
+
+        //}
+        //else
+        //{
+
+        //    if (animator != null)
+        //    {
+        //        animator.SetBool("IsMoving", false);
+        //    }
+        //}
+
     }
     private bool TryMove(Vector2 direction)
     {
@@ -56,14 +76,65 @@ public class PlayerController : MonoBehaviour
         {
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             return true;
-        } 
-        else {
+        }
+        else
+        {
             return false;
-        }  
+        }
     }
     void OnMove(InputValue movementValue)
     {
         movementInput = movementValue.Get<Vector2>();
 
     }
+
+
+
+
+    // private void IsMoving()
+    //  {
+    //   if
+    // }
+    private void HandleAnimation()
+    {
+         if(TryMove(movementInput) == true) ;
+        { 
+            // Reset all animation triggers and set all boolean parameters to false
+            animator.ResetTrigger("WalkRight");
+            animator.ResetTrigger("WalkLeft");
+            animator.ResetTrigger("WalkForward");
+            animator.ResetTrigger("WalkBackward");
+            animator.SetBool("IsWalkingRight", false);
+            animator.SetBool("IsWalkingLeft", false);
+            animator.SetBool("IsWalkingForward", false);
+            animator.SetBool("IsWalkingBackward", false);
+
+            // Check movement keys and set the appropriate animation triggers and boolean parameters
+            if (Input.GetKey(KeyCode.D))
+            {
+                animator.SetBool("WalkRight", true);
+                // Reset scale to normal if previously flipped
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                animator.SetBool("WalkLeft", true);
+                // Flip the character sprite when walking left
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (Input.GetKey(KeyCode.W))
+            {
+                animator.SetBool("WalkForward", true);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                animator.SetBool("WalkBackward", true);
+            }
+        }
+    }
+
+
+
+
+
 }
