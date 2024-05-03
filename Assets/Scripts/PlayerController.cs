@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
                 if (!sucsess)
                 {
-                    sucsess = TryMove(new Vector2(0, movementInput.y);
+                    sucsess = TryMove(new Vector2(0, movementInput.y));
                 }
             }
         }
