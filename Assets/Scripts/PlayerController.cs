@@ -5,18 +5,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 1f;
+    public int maxHealth = 100;
+    private int currentHealth;
+    private bool isCollidingWithEnemy = false;
+    private float collisionTimer = 0f;
+    public float collisionDuration = 1f; // Adjust the collision duration as needed
 
+    public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
+    public bool isAttacking = false;
+    public bool success;
 
     public ContactFilter2D movementFilter;
     private Vector3 facingDirection = Vector3.forward;
-
     Vector2 movementInput;
-    private bool isAttacking = false;
-    public bool sucsess;
+
     Rigidbody2D rb;
     private Animator animator;
+    public SwordAttack playerAttack;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     public float direction;
 
@@ -25,74 +31,57 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        currentHealth = maxHealth; // Set current health to maximum health when the game starts
     }
 
     private void FixedUpdate()
     {
         if (movementInput != Vector2.zero)
         {
+            success = TryMove(movementInput);
 
-             sucsess = TryMove(movementInput);
-
-            if (!sucsess)
+            if (!success)
             {
-                sucsess = TryMove(new Vector2(movementInput.x, 0));
+                success = TryMove(new Vector2(movementInput.x, 0));
 
-                if (!sucsess)
+                if (!success)
                 {
-                    sucsess = TryMove(new Vector2(0, movementInput.y));
+                    success = TryMove(new Vector2(0, movementInput.y));
                 }
             }
         }
 
         HandleMovement();
         HandleAttack();
-       
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-
-        //    animator.SetBool("IsMoving", true);
-        //    animator.SetTrigger("WalkRight");
-
-
-        //}
-        //else
-        //{
-
-        //    if (animator != null)
-        //    {
-        //        animator.SetBool("IsMoving", false);
-        //    }
-        //}
-
     }
+
     private bool TryMove(Vector2 direction)
     {
-        int count = rb.Cast(
-               direction,
-               movementFilter,
-               castCollisions,
-              moveSpeed * Time.fixedDeltaTime + collisionOffset);
-        if (count == 0)
+        if (!isAttacking)
         {
-            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
-            return true;
+            int count = rb.Cast(
+                   direction,
+                   movementFilter,
+                   castCollisions,
+                  moveSpeed * Time.fixedDeltaTime + collisionOffset);
+            if (count == 0)
+            {
+                rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
+
     void OnMove(InputValue movementValue)
     {
         movementInput = movementValue.Get<Vector2>();
-
     }
-
-
-
-
- 
 
     private void HandleMovement()
     {
@@ -116,56 +105,111 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("WalkRight", true);
                 // Reset scale to normal if previously flipped
                 transform.localScale = new Vector3(1, 1, 1);
-                // Set the facing direction to right
-                facingDirection = Vector3.right;
+                playerAttack.transform.localPosition = new Vector3(0.16f, 0, 0);
+                playerAttack.transform.localRotation = Quaternion.identity;
             }
             else if (Input.GetKey(KeyCode.A))
             {
                 animator.SetBool("WalkLeft", true);
                 // Flip the character sprite when walking left
                 transform.localScale = new Vector3(-1, 1, 1);
-                // Set the facing direction to left
-                facingDirection = Vector3.left;
+                playerAttack.transform.localPosition = new Vector3(0.16f, 0, 0);
+                playerAttack.transform.localRotation = Quaternion.identity;
             }
             else if (Input.GetKey(KeyCode.W))
             {
                 animator.SetBool("WalkForward", true);
                 // Set the facing direction to forward
-                facingDirection = Vector3.forward;
+                playerAttack.transform.localPosition = new Vector3(0, 0.16f, 0);
+                playerAttack.transform.localRotation = Quaternion.Euler(0, 0, 90);
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 animator.SetBool("WalkBackward", true);
-                // Set the facing direction to backward
-                facingDirection = Vector3.back;
+                playerAttack.transform.localPosition = new Vector3(0, -0.16f, 0);
+                playerAttack.transform.localRotation = Quaternion.Euler(0, 0, -90);
             }
         }
     }
 
     private void HandleAttack()
     {
-        // Check if the left mouse button (button 0) is pressed for attack
         if (Input.GetMouseButtonDown(0))
         {
+            isAttacking = true;
             // Set the trigger for the sword attack animation
             animator.SetTrigger("SwordAttack");
 
-            // Pass the facing direction to the Attack method (assuming you have an Attack method to handle the attack logic)
             Attack(facingDirection);
         }
-    }
-
-    private void Update()
-    {
-        HandleMovement();
-        HandleAttack();
     }
 
     private void Attack(Vector3 direction)
     {
         // Add your attack logic here
         // You can use the 'direction' vector to determine the direction of the attack
+        // For example, you can cast a ray or check for collision with enemies here
     }
 
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
 
+        // Check if the player is dead
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // Add death logic here, such as playing death animation, resetting the game, etc.
+        Debug.Log("Player died!");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            // Set collision flag to true when colliding with the enemy
+            isCollidingWithEnemy = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            // Reset collision flag and timer when no longer colliding with the enemy
+            isCollidingWithEnemy = false;
+            collisionTimer = 0f;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // If the collision is with the enemy, start the collision timer
+            isCollidingWithEnemy = true;
+            collisionTimer += Time.deltaTime;
+
+            // If the collision duration has been reached, apply damage to the player
+            if (collisionTimer >= collisionDuration)
+            {
+                TakeDamage(10); // Example: Player takes 10 damage
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // Reset collision flag and timer when no longer colliding with the enemy
+            isCollidingWithEnemy = false;
+            collisionTimer = 0f;
+        }
+    }
 }
