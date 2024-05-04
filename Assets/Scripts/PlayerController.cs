@@ -10,10 +10,10 @@ public class PlayerController : MonoBehaviour
     public float collisionOffset = 0.05f;
 
     public ContactFilter2D movementFilter;
-
+    private Vector3 facingDirection = Vector3.forward;
 
     Vector2 movementInput;
-
+    private bool isAttacking = false;
     public bool sucsess;
     Rigidbody2D rb;
     private Animator animator;
@@ -45,8 +45,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        HandleAnimation();
-
+        HandleMovement();
+        HandleAttack();
+       
         //if (Input.GetKeyDown(KeyCode.D))
         //{
 
@@ -91,23 +92,23 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // private void IsMoving()
-    //  {
-    //   if
-    // }
-    private void HandleAnimation()
+ 
+
+    private void HandleMovement()
     {
-         if(TryMove(movementInput) == true) ;
-        { 
+        if (!isAttacking)
+        {
             // Reset all animation triggers and set all boolean parameters to false
             animator.ResetTrigger("WalkRight");
             animator.ResetTrigger("WalkLeft");
             animator.ResetTrigger("WalkForward");
             animator.ResetTrigger("WalkBackward");
-            animator.SetBool("IsWalkingRight", false);
-            animator.SetBool("IsWalkingLeft", false);
-            animator.SetBool("IsWalkingForward", false);
-            animator.SetBool("IsWalkingBackward", false);
+
+            // Reset all boolean parameters to false
+            animator.SetBool("WalkRight", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkForward", false);
+            animator.SetBool("WalkBackward", false);
 
             // Check movement keys and set the appropriate animation triggers and boolean parameters
             if (Input.GetKey(KeyCode.D))
@@ -115,26 +116,56 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("WalkRight", true);
                 // Reset scale to normal if previously flipped
                 transform.localScale = new Vector3(1, 1, 1);
+                // Set the facing direction to right
+                facingDirection = Vector3.right;
             }
             else if (Input.GetKey(KeyCode.A))
             {
                 animator.SetBool("WalkLeft", true);
                 // Flip the character sprite when walking left
                 transform.localScale = new Vector3(-1, 1, 1);
+                // Set the facing direction to left
+                facingDirection = Vector3.left;
             }
             else if (Input.GetKey(KeyCode.W))
             {
                 animator.SetBool("WalkForward", true);
+                // Set the facing direction to forward
+                facingDirection = Vector3.forward;
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 animator.SetBool("WalkBackward", true);
+                // Set the facing direction to backward
+                facingDirection = Vector3.back;
             }
         }
     }
 
+    private void HandleAttack()
+    {
+        // Check if the left mouse button (button 0) is pressed for attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Set the trigger for the sword attack animation
+            animator.SetTrigger("SwordAttack");
 
+            // Pass the facing direction to the Attack method (assuming you have an Attack method to handle the attack logic)
+            Attack(facingDirection);
+        }
+    }
 
+    private void Update()
+    {
+        HandleMovement();
+        HandleAttack();
+    }
+
+    private void Attack(Vector3 direction)
+    {
+        // Add your attack logic here
+        // You can use the 'direction' vector to determine the direction of the attack
+    }
 
 
 }
