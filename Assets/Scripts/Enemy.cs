@@ -32,11 +32,12 @@ public class Enemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
     }
- 
-    void OnTriggerEnter2D(Collider2D other)
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
+       
         // Check if collided with the player
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             // Die when colliding with the player
             Die();
@@ -46,8 +47,12 @@ public class Enemy : MonoBehaviour
                 player.TakeDamage(20); // Adjust damage as needed
             }
 
-          
+
         }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+    
     }
 
     public void TakeDamage(int damage)
