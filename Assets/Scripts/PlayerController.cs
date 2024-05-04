@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
                 return false;
             }
 
-        }
+       }
         return false;
     }
 
@@ -105,29 +105,25 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("WalkRight", true);
                 // Reset scale to normal if previously flipped
                 transform.localScale = new Vector3(1, 1, 1);
-                playerAttack.transform.localPosition = new Vector3(0.16f, 0, 0);
-                playerAttack.transform.localRotation = Quaternion.identity;
+                playerAttack.transform.SetLocalPositionAndRotation(new Vector3(0.16f, 0, 0), Quaternion.identity);
             }
             else if (Input.GetKey(KeyCode.A))
             {
                 animator.SetBool("WalkLeft", true);
                 // Flip the character sprite when walking left
                 transform.localScale = new Vector3(-1, 1, 1);
-                playerAttack.transform.localPosition = new Vector3(0.16f, 0, 0);
-                playerAttack.transform.localRotation = Quaternion.identity;
+                playerAttack.transform.SetLocalPositionAndRotation(new Vector3(0.16f, 0, 0), Quaternion.identity);
             }
             else if (Input.GetKey(KeyCode.W))
             {
                 animator.SetBool("WalkForward", true);
                 // Set the facing direction to forward
-                playerAttack.transform.localPosition = new Vector3(0, 0.16f, 0);
-                playerAttack.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                playerAttack.transform.SetLocalPositionAndRotation(new Vector3(0, 0.16f, 0), Quaternion.Euler(0, 0, 90));
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 animator.SetBool("WalkBackward", true);
-                playerAttack.transform.localPosition = new Vector3(0, -0.16f, 0);
-                playerAttack.transform.localRotation = Quaternion.Euler(0, 0, -90);
+                playerAttack.transform.SetLocalPositionAndRotation(new Vector3(0, -0.16f, 0), Quaternion.Euler(0, 0, -90));
             }
         }
     }

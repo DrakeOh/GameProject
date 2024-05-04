@@ -25,12 +25,12 @@ public class SwordAttack : MonoBehaviour
         swordCollider.enabled = false;
         playerController.isAttacking = false;
     }
-
+   
     private void FixedUpdate()
     {
         if (playerController.isAttacking)
         {
-            StartCoroutine(EnableColliderForDuration(3f)); // Enable collider for 3 seconds
+            StartCoroutine(EnableColliderForDuration(1f)); // Enable collider for 3 seconds
         }
     }
 
@@ -43,7 +43,7 @@ public class SwordAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the collision is with an enemy
-        if (other.CompareTag("enemy"))
+        if (other.CompareTag("Enemy"))
         {
             // Handle collision with enemy
             Debug.Log("Collision detected with an enemy: " + other.gameObject.name);
