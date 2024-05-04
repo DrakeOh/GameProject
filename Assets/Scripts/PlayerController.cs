@@ -133,7 +133,7 @@
 
     private void HandleAttack()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.K))
         {
             isAttacking = true;
             // Set the trigger for the sword attack animation
