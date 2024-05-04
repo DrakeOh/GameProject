@@ -50,10 +50,6 @@ public class Enemy : MonoBehaviour
 
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-    
-    }
 
     public void TakeDamage(int damage)
     {
