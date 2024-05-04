@@ -25,7 +25,7 @@ public class SwordAttack : MonoBehaviour
         swordCollider.enabled = false;
         playerController.isAttacking = false;
     }
-   
+
     private void FixedUpdate()
     {
         if (playerController.isAttacking)
