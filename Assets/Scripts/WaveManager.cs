@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public EnemySpawner enemySpawner; // Reference to the enemy spawner
+    public EnemySpawner[] enemySpawners; // Array of enemy spawners
     public float timeBetweenWaves = 10f; // Time between each wave
 
     private int currentWave = 0;
@@ -26,6 +26,9 @@ public class WaveManager : MonoBehaviour
     {
         currentWave++;
         Debug.Log("Starting Wave " + currentWave);
-        enemySpawner.StartWave(currentWave);
+        foreach (EnemySpawner spawner in enemySpawners)
+        {
+            spawner.StartWave(currentWave);
+        }
     }
 }

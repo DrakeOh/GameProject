@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  speed: 0.1
+  speed: 0.2
 --- !u!95 &2065046276263570655
 Animator:
   serializedVersion: 5
