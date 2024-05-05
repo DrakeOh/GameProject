@@ -7,14 +7,14 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRadius = 5f; // Radius within which the enemy can spawn
     public float initialEnemyHealth = 100f; // Initial health of enemies
     public int healthIncreasePerWave = 5; // Health increase per wave
-
+    public int NumberOfEnmeies;
     private bool spawningWave = false;
     private float currentEnemyHealth;
 
     void Start()
     {
         currentEnemyHealth = initialEnemyHealth;
-        SpawnEnemy();
+        
     }
 
     public void StartWave(int waveNumber)
@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
         currentEnemyHealth += healthIncreasePerWave * waveNumber;
 
         // Spawn a wave of enemies
-        for (int i = 0; i < 5; i++) // Adjust 5 to the number of enemies per wave
+        for (int i = 0; i < NumberOfEnmeies; i++) // Adjust 5 to the number of enemies per wave
         {
             SpawnEnemy();
             yield return new WaitForSeconds(1f);

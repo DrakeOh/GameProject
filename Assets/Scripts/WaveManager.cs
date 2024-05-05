@@ -4,7 +4,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     public EnemySpawner[] enemySpawners; // Array of enemy spawners
-    public float timeBetweenWaves = 10f; // Time between each wave
+    public float timeBetweenWaves; // Time between each wave
 
     private int currentWave = 0;
 
