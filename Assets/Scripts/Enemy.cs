@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,7 +8,8 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     public float speed = 5f; // Adjust the speed as needed
     private PlayerController player; // Reference to the player's transform
-
+    public AudioSource audioSource;
+    public bool dead;
     void Start()
     {
         currentHealth = maxHealth;
@@ -59,9 +61,21 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            dead = true;
+        }
+        
+    }
+    public void PlaySound()
+    {
+        if (audioSource != null)
+        {
+            if (dead == true)
+            
+                audioSource.Play();
+            
+            
         }
     }
-
     void Die()
     {
         if (animator != null)
@@ -71,5 +85,10 @@ public class Enemy : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 2f);
         Debug.Log("Enemy died");
+    }
+
+    public static implicit operator Enemy(bool v)
+    {
+        throw new NotImplementedException();
     }
 }
