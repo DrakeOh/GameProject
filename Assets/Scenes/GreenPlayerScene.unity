@@ -397,7 +397,7 @@ MonoBehaviour:
   - {fileID: 308804297}
   - {fileID: 803470655}
   timeBetweenWaves: 30
-  timeBeforeBoss: 110
+  timeBeforeBoss: 3
   waveTimerText: {fileID: 716894232}
   bossTimerText: {fileID: 1578640492}
   bossPrefab: {fileID: 451710893878055599, guid: e4dcbb41d889122428b02379212facaa, type: 3}

@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1055335657257360841, guid: e226819de3e074c4c927f4a06b0f7bdb, type: 3}
-  bossPrefab: {fileID: 451710893878055599, guid: e4dcbb41d889122428b02379212facaa, type: 3}
+  bossPrefab: {fileID: 6957195784417109033, guid: e4dcbb41d889122428b02379212facaa, type: 3}
   spawnRadius: 0.1
   initialEnemyHealth: 10
   healthIncreasePerWave: 5
