@@ -401,8 +401,8 @@ MonoBehaviour:
   enemySpawners:
   - {fileID: 308804297}
   - {fileID: 803470655}
-  timeBetweenWaves: 5
-  timeBeforeBoss: 20
+  timeBetweenWaves: 30
+  timeBeforeBoss: 110
   waveTimerText: {fileID: 1100422112}
   bossTimerText: {fileID: 1442611531}
   bossPrefab: {fileID: 451710893878055599, guid: e4dcbb41d889122428b02379212facaa, type: 3}
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   bossPrefab: {fileID: 0}
   spawnRadius: 0.1
   initialEnemyHealth: 10
-  healthIncreasePerWave: 5
+  healthIncreasePerWave: 10
   numberOfEnemies: 5
 --- !u!4 &803470656
 Transform:
