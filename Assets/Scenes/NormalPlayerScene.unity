@@ -2956,6 +2956,10 @@ PrefabInstance:
       propertyPath: m_TileAnchor.y
       value: 0.16
       objectReference: {fileID: 0}
+    - target: {fileID: 5324884463504092045, guid: a54c2960f29a6364d960f0140e25353f, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6454087148682761435, guid: a54c2960f29a6364d960f0140e25353f, type: 3}
       propertyPath: m_TileAnchor.x
       value: 0.16

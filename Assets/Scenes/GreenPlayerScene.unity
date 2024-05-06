@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1055335657257360841, guid: e226819de3e074c4c927f4a06b0f7bdb, type: 3}
-  bossPrefab: {fileID: 451710893878055599, guid: e4dcbb41d889122428b02379212facaa, type: 3}
+  bossPrefab: {fileID: 6957195784417109033, guid: e4dcbb41d889122428b02379212facaa, type: 3}
   spawnRadius: 0.1
   initialEnemyHealth: 10
   healthIncreasePerWave: 5
@@ -1592,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5324884463504092045, guid: a54c2960f29a6364d960f0140e25353f, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6454087148682761435, guid: a54c2960f29a6364d960f0140e25353f, type: 3}
       propertyPath: m_TileAnchor.x
