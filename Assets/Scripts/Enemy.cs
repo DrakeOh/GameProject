@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
-            dead = true;
+            
         }
         
     }
@@ -70,7 +70,6 @@ public class Enemy : MonoBehaviour
     {
         if (audioSource != null)
         {
-            if (dead == true)
             
                 audioSource.Play();
             
@@ -83,6 +82,7 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("Die");
         }
+        PlaySound();
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 2f);
         Debug.Log("Enemy died");

@@ -7,7 +7,7 @@ public class Music : MonoBehaviour
 {
 
     PlayerController PlayerController;
-    public AudioSource audioSource;
+    public AudioSource Mohamednull;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +24,13 @@ public class Music : MonoBehaviour
 
     public void PlaySound()
     {
-        if (audioSource != null)
+        if (Mohamednull != null)
         {
              if (Input.GetKey(KeyCode.K))
                 {
 
 
-                audioSource.Play();
+                Mohamednull.Play();
             }
         }
     }

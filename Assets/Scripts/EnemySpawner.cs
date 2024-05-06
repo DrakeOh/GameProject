@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < numberOfEnemies; i++)
         {
             SpawnEnemy(enemyPrefab);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1);
         }
 
         spawningWave = false;
