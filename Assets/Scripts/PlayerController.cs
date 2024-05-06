@@ -158,7 +158,7 @@
                 Enemy enemy = hit.collider.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(20); // Adjust damage as needed
+                    enemy.TakeDamage(20);
                 }
             }
         }

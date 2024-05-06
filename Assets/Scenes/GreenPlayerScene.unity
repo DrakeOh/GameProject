@@ -503,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   speed: 5
-  audioSource: {fileID: 212348575}
+  audioSource: {fileID: 447201246}
   dead: 0
   damage: 0
 --- !u!82 &447201246
