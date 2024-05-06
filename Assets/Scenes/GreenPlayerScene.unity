@@ -396,7 +396,7 @@ MonoBehaviour:
   enemySpawners:
   - {fileID: 308804297}
   - {fileID: 803470655}
-  timeBetweenWaves: 3
+  timeBetweenWaves: 30
   timeBeforeBoss: 110
   waveTimerText: {fileID: 716894232}
   bossTimerText: {fileID: 1578640492}
