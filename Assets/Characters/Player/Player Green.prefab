@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4672157433745510238}
   - component: {fileID: 6097017831256017406}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player Green
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1708075296, guid: e73f7a8cf84336e49a590dbd79710332, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.03058815, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -217,8 +217,6 @@ MonoBehaviour:
     maxNormalAngle: 0
   playerAttack: {fileID: 3288916014102292847}
   direction: 0
-  popUpMessage: {fileID: 0}
-  GameOver: {fileID: 0}
 --- !u!50 &5891274596074756812
 Rigidbody2D:
   serializedVersion: 4
@@ -374,7 +372,5 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  playerAttack: {fileID: 3288916014102292847}
+  playerAttack: {fileID: 0}
   direction: 0
-  popUpMessage: {fileID: 0}
-  GameOver: {fileID: 0}

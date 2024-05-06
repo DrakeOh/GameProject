@@ -164,6 +164,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   speed: 0.2
+  audioSource: {fileID: 0}
+  dead: 0
+  damage: 0
 --- !u!95 &2065046276263570655
 Animator:
   serializedVersion: 5

@@ -26,16 +26,18 @@
         public SwordAttack playerAttack;
         List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
         public float direction;
+        public Health popUpMessage;
+        public  PauseMenu GameOver;
 
-        // Start is called before the first frame update
-        void Start()
+    // Start is called before the first frame update
+    void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
         currentHealth = maxHealth;
 
 
-    }
+          }
 
     private void FixedUpdate()
         {
@@ -166,7 +168,7 @@
     {
         currentHealth -= damage;
         Debug.Log("Enemy took " + damage + " damage. Current health: " + currentHealth);
-
+        //popUpMessage.ShowMessage("health : " + currentHealth);
         if (currentHealth <= 0)
         {
             Die();
@@ -181,6 +183,8 @@
         GetComponent<Collider2D>().enabled = false;
         Time.timeScale = 0;
         Debug.Log("Player died");
+        GameOver.gameOver();
+
     }
 
 }

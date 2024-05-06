@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHealth = 100;
-    private int currentHealth;
+    public float maxHealth = 100;
+    private float currentHealth;
     private Animator animator;
     public float speed = 5f; // Adjust the speed as needed
     private PlayerController player; // Reference to the player's transform
     public AudioSource audioSource;
     public bool dead;
+     [SerializeField] float damage;
     void Start()
     {
         currentHealth = maxHealth;
@@ -46,14 +47,14 @@ public class Enemy : MonoBehaviour
             if (player != null)
             {
                 // Apply damage to the player
-                player.TakeDamage(20); // Adjust damage as needed
+                player.TakeDamage(100); // Adjust damage as needed
             }
 
 
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         Debug.Log("Enemy took " + damage + " damage. Current health: " + currentHealth);
