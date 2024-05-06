@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
             if (player != null)
             {
                 // Apply damage to the player
-                player.TakeDamage(100); // Adjust damage as needed
+                player.TakeDamage(5); // Adjust damage as needed
             }
 
 

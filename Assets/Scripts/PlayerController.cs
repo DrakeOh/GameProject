@@ -168,7 +168,7 @@
     {
         currentHealth -= damage;
         Debug.Log("Enemy took " + damage + " damage. Current health: " + currentHealth);
-        //popUpMessage.ShowMessage("health : " + currentHealth);
+        popUpMessage.ShowMessage("health : " + currentHealth);
         if (currentHealth <= 0)
         {
             Die();

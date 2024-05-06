@@ -18,5 +18,7 @@ public class PlayButton : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(gameSceneName); // Load the game scene
+                Time.timeScale = 1f;
+
     }
 }
